@@ -20,6 +20,8 @@ from sklearn.tree import DecisionTreeClassifier
 ### and testing datasets, respectively
 ### labels_train and labels_test are the corresponding item labels
 features_train, features_test, labels_train, labels_test = preprocess()
+print features_train.shape
+
 timing_and_accuracy(DecisionTreeClassifier, 
 	features_train, features_test, labels_train, labels_test,
 	model_params = {'min_samples_split':40})
