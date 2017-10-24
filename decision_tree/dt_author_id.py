@@ -12,13 +12,17 @@ import sys
 from time import time
 sys.path.append("../tools/")
 from email_preprocess import preprocess
+from timing_accuracy import timing_and_accuracy
+from sklearn.tree import DecisionTreeClassifier
 
 
 ### features_train and features_test are the features for the training
 ### and testing datasets, respectively
 ### labels_train and labels_test are the corresponding item labels
 features_train, features_test, labels_train, labels_test = preprocess()
-
+timing_and_accuracy(DecisionTreeClassifier, 
+	features_train, features_test, labels_train, labels_test,
+	model_params = {'min_samples_split':40})
 
 
 
