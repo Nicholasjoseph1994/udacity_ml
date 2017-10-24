@@ -19,4 +19,16 @@ import pickle
 
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r"))
 
+pois = [person_name for person_name in enron_data.keys() if enron_data[person_name]['poi']==1]
+print pois
+print 'There are {} POIs'.format(len(pois))
 
+print 'James Prentice had {} stock'.format(enron_data['PRENTICE JAMES']['total_stock_value'])
+print 'Wesley  Colwell wrote {} emails to POIs'.format(enron_data['COLWELL WESLEY']['from_this_person_to_poi'])
+leaders = ['SKILLING JEFFREY K', 'LAY KENNETH L', 'FASTOW ANDREW S']
+print 'Jeffrey Skilling exercised {} stock options'.format(enron_data['SKILLING JEFFREY K']['exercised_stock_options'])
+print '{} took home the most money. He got {}'.format(
+	max(leaders, key = lambda x: enron_data[x]['total_payments']),
+	max([enron_data[x]['total_payments'] for x in leaders]))
+print '{} people have a defined salary'.format(len([x for x in enron_data.keys() if enron_data[x]['salary'] != 'NaN']))
+print '{} people have a defined email address'.format(len([x for x in enron_data.keys() if enron_data[x]['email_address'] != 'NaN']))
