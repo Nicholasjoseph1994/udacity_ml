@@ -19,6 +19,8 @@ import pickle
 
 enron_data = pickle.load(open("../final_project/final_project_dataset.pkl", "r"))
 
+print len(enron_data.keys())
+
 pois = [person_name for person_name in enron_data.keys() if enron_data[person_name]['poi']==1]
 print pois
 print 'There are {} POIs'.format(len(pois))
@@ -32,3 +34,6 @@ print '{} took home the most money. He got {}'.format(
 	max([enron_data[x]['total_payments'] for x in leaders]))
 print '{} people have a defined salary'.format(len([x for x in enron_data.keys() if enron_data[x]['salary'] != 'NaN']))
 print '{} people have a defined email address'.format(len([x for x in enron_data.keys() if enron_data[x]['email_address'] != 'NaN']))
+
+print '{} of the people are missing total payments'.format(float(len([x for x in enron_data.keys() if enron_data[x]['total_payments'] == 'NaN'])) / len(enron_data.keys()))
+print '{} of the POIs are missing total payments'.format(float(len([x for x in pois if enron_data[x]['total_payments'] == 'NaN'])))
