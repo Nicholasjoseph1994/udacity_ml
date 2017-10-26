@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 from nltk.stem.snowball import SnowballStemmer
+from nltk.tokenize.treebank import TreebankWordTokenizer
 import string
 
 def parseOutText(f):
@@ -28,7 +29,11 @@ def parseOutText(f):
         text_string = content[1].translate(string.maketrans("", ""), string.punctuation)
 
         ### project part 2: comment out the line below
-        words = text_string
+        # words = text_string
+        stemmer = SnowballStemmer('english')
+        t = TreebankWordTokenizer()
+        text_words = t.tokenize(text_string)
+        words = ' '.join([stemmer.stem(w) for w in text_words])
 
         ### split the text string into individual words, stem each word,
         ### and append the stemmed word to words (make sure there's a single

@@ -35,9 +35,16 @@ features_test  = vectorizer.transform(features_test).toarray()
 features_train = features_train[:150].toarray()
 labels_train   = labels_train[:150]
 
+# Fit over-fitted decision tree
+from sklearn.tree import DecisionTreeClassifier
+clf = DecisionTreeClassifier()
+clf.fit(features_train, labels_train)
 
-
-### your code goes here
-
-
+# Predict and check accuracy
+from sklearn.metrics import accuracy_score
+pred = clf.predict(features_test)
+print len(pred), len(labels_test)
+print pred
+print labels_test
+print 'The accuracy of the overfitted decision tree is {}'.format(accuracy_score(labels_test, pred))
 
